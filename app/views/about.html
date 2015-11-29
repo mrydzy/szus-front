@@ -1,0 +1,113 @@
+<table class="table" st-pipe="about.callServer" st-table="about.displayed">
+  <thead>
+  <tr>
+    <th>
+      <span class="col-md-3 table-icon-position">
+        <md-button class="md-icon-button" aria-label="Favorite">
+        <md-icon class="glyphicon glyphicon-home" aria-hidden="true" st-sort="from">
+        </md-icon>
+          <md-tooltip md-direction="top">
+            Posortuj alfabetycznie
+          </md-tooltip>
+          </md-button>
+      </span>
+      <span class="col-md-9">
+        <md-input-container flex>
+          <label>Miasto wyjazdu</label>
+          <input st-search="from">
+        </md-input-container>
+      </span>
+    </th>
+    <th>
+      <span class="col-md-3 table-icon-position">
+        <md-button class="md-icon-button" aria-label="Favorite">
+        <md-icon class="glyphicon glyphicon-road" aria-hidden="true" st-sort="to">
+        </md-icon>
+          <md-tooltip md-direction="top">
+            Posortuj alfabetycznie
+          </md-tooltip>
+        </md-button>
+      </span>
+      <span class="col-md-9">
+
+        <md-input-container flex>
+          <label>Stok </md-icon></label>
+          <input st-search="to">
+        </md-input-container>
+        </span>
+    </th>
+    <th style="min-width:200px; padding-top:30px" class="center-datepicker">
+      <span class="col-md-3">
+        <md-button class="md-icon-button" aria-label="Favorite">
+          <md-icon class="glyphicon glyphicon-calendar" aria-hidden="true" st-sort="departureTime">
+          </md-icon>
+          <md-tooltip md-direction="top">
+            Posortuj chronologicznie
+          </md-tooltip>
+        </md-button>
+      </span>
+      <span class="col-md-9 hide-calendar center-datepicker">
+        <md-datepicker ng-model="about.departureTime" class="datepicker-style"></md-datepicker>
+    </span>
+    </th>
+    <th>
+      <span class="col-md-3 table-icon-position">
+      <md-button class="md-icon-button" aria-label="Favorite">
+        <md-icon class="glyphicon glyphicon-user" aria-hidden="true" st-sort="driver">
+        </md-icon>
+        <md-tooltip md-direction="top">
+          Posortuj alfabetycznie
+        </md-tooltip>
+      </md-button>
+      </span>
+      <span class="col-md-9">
+
+      <md-input-container flex>
+        <label>Kierowca</label>
+        <input st-search="driver">
+      </md-input-container>
+    </span>
+    </th>
+    <th>
+      <span class="col-md-3 table-icon-position">
+        <md-button class="md-icon-button" aria-label="Favorite">
+          <md-icon class="glyphicon glyphicon-usd" aria-hidden="true" st-sort="price">
+          </md-icon>
+          <md-tooltip md-direction="top">
+            Posortuj
+          </md-tooltip>
+        </md-button>
+        </span>
+        <span class="col-md-9">
+
+          <md-input-container flex>
+            <label>Cena</label>
+            <input st-search="price" disabled>
+          </md-input-container>
+      </span>
+    </th>
+  </tr>
+  </thead>
+  <tbody ng-show="!about.isLoading">
+  <tr ng-repeat="row in about.displayed" ng-if="about.departureTime <= row.departureTime">
+    <td>{{row.from}}</td>
+    <td>{{row.to}}</td>
+    <td>{{row.departureTime | date: 'H:mm d/M'}}</td>
+    <td>{{row.driver}}</td>
+    <td>{{row.price}} PLN</td>
+  </tr>
+  </tbody>
+  <tbody ng-show="about.isLoading">
+  <tr>
+    <td colspan="5" class="text-center">
+      <md-progress-circular md-mode="indeterminate" class="loader-center"></md-progress-circular>
+    </td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td class="text-center" st-pagination="" st-items-by-page="15" colspan="6">
+    </td>
+  </tr>
+  </tfoot>
+</table>
